@@ -30,7 +30,6 @@ pub fn part_one(input: &str) -> Option<u32> {
             }
         }
 
-        dbg!(&calibration_value);
         let line_total: u32 = calibration_value.parse().unwrap();
         total += line_total;
     }
