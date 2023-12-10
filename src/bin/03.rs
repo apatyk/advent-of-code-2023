@@ -151,10 +151,7 @@ pub fn part_two(input: &str) -> Option<u32> {
                 if bb_gear_index.is_some() {
                     // add number to a hash map keyed on the index of the gear character
                     let gear_index = bb_indices[bb_gear_index.unwrap()];
-                    possible_gears
-                        .entry(gear_index)
-                        .or_default()
-                        .push(number);
+                    possible_gears.entry(gear_index).or_default().push(number);
                 }
             }
             // corner case for when row ends with a digit & next row starts with a digit

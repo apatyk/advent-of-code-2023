@@ -15,26 +15,26 @@ fn read_lines(filename: &Path) -> Vec<String> {
 }
 
 fn replace_with_mappings(input: String, mappings: &HashMap<&str, &str>) -> String {
-  let mut result = input;
+    let mut result = input;
 
-  // find all possible mappings in each line
-  let mut possible_mappings: Vec<(usize, &str)> = Vec::new();
-  for (map_key, _) in mappings {
-      let matches: Vec<_> = result.match_indices(map_key).collect();
-      for m in matches {
-        possible_mappings.push((m.0, map_key));
-      }
-  }
-  
-  // replace first character in spelled out word with digit mapping to avoid
-  // interfering with overlaps
-  for mapping in possible_mappings {
-      let index = mapping.0;
-      let key = &mapping.1;
-      result.replace_range(index..(index + 1), &mappings[key]);
-  }
+    // find all possible mappings in each line
+    let mut possible_mappings: Vec<(usize, &str)> = Vec::new();
+    for (map_key, _) in mappings {
+        let matches: Vec<_> = result.match_indices(map_key).collect();
+        for m in matches {
+            possible_mappings.push((m.0, map_key));
+        }
+    }
 
-  result.to_string()
+    // replace first character in spelled out word with digit mapping to avoid
+    // interfering with overlaps
+    for mapping in possible_mappings {
+        let index = mapping.0;
+        let key = &mapping.1;
+        result.replace_range(index..(index + 1), &mappings[key]);
+    }
+
+    result.to_string()
 }
 
 fn main() {

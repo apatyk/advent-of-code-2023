@@ -45,10 +45,10 @@ fn replace_with_mappings(input: String, mappings: &HashMap<&str, &str>) -> Strin
     for (map_key, _) in mappings {
         let matches: Vec<_> = result.match_indices(map_key).collect();
         for m in matches {
-          possible_mappings.push((m.0, map_key));
+            possible_mappings.push((m.0, map_key));
         }
     }
-    
+
     // replace first character in spelled out word with digit mapping to avoid
     // interfering with overlaps
     for mapping in possible_mappings {
