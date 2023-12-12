@@ -7,22 +7,22 @@ fn prepare_input(input: &str) -> Vec<String> {
 }
 
 fn vec_lcm(vec: Vec<u32>) -> u32 {
-  let mut lcm = vec[0];
+    let mut lcm = vec[0];
 
-  for &n in &vec[1..] {
-    lcm = (n * lcm) / (gcd(n, lcm));
-  }
+    for &n in &vec[1..] {
+        lcm = (n * lcm) / (gcd(n, lcm));
+    }
 
-  lcm
+    lcm
 }
 
 fn gcd(a: u32, b: u32) -> u32 {
-  if b == 0 {
-      a
-  } else {
-      gcd(b, a % b)
-  }
-}			
+    if b == 0 {
+        a
+    } else {
+        gcd(b, a % b)
+    }
+}
 
 pub fn part_one(input: &str) -> Option<u32> {
     let mut total_steps: u32 = 0;
@@ -50,7 +50,7 @@ pub fn part_one(input: &str) -> Option<u32> {
     // traverse nodes
     let mut current_node = String::from("AAA");
     let mut dir_index: usize = 0;
-    while current_node != String::from("ZZZ") {
+    while current_node != *"ZZZ" {
         let direction: char = directions.chars().nth(dir_index).unwrap();
 
         let downstream_nodes = nodes.get(&current_node).unwrap();
@@ -99,24 +99,24 @@ pub fn part_two(input: &str) -> Option<u32> {
     // determine individual loop lengths and calculate LCM
     let mut all_node_cycle_lengths: Vec<u32> = vec![];
     for node in starting_nodes {
-      let mut dir_index: usize = 0;
-      let mut steps = 0;
-      let mut current_node = node;
-      while !current_node.ends_with('Z') {
-        let direction: char = directions.chars().nth(dir_index).unwrap();
+        let mut dir_index: usize = 0;
+        let mut steps = 0;
+        let mut current_node = node;
+        while !current_node.ends_with('Z') {
+            let direction: char = directions.chars().nth(dir_index).unwrap();
 
-        let downstream_nodes = nodes.get(&current_node).unwrap();
-        current_node = match direction {
-            'L' => downstream_nodes.0.to_owned(),
-            'R' => downstream_nodes.1.to_owned(),
-            _ => current_node,
-        };
-        dir_index = (dir_index + 1) % directions.len();
-        steps += 1;
-      }
-      all_node_cycle_lengths.push(steps);
+            let downstream_nodes = nodes.get(&current_node).unwrap();
+            current_node = match direction {
+                'L' => downstream_nodes.0.to_owned(),
+                'R' => downstream_nodes.1.to_owned(),
+                _ => current_node,
+            };
+            dir_index = (dir_index + 1) % directions.len();
+            steps += 1;
+        }
+        all_node_cycle_lengths.push(steps);
     }
-    
+
     all_node_cycle_lengths.sort();
     let total_steps = vec_lcm(all_node_cycle_lengths);
 

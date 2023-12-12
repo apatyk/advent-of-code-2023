@@ -44,7 +44,7 @@ fn main() {
                 };
             }
         }
-        for (_, value) in &cube_counts {
+        for value in cube_counts.values() {
             cube_power *= value;
         }
         cube_power_total += cube_power;

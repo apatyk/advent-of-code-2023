@@ -20,7 +20,7 @@ pub fn part_one(input: &str) -> Option<u32> {
         .split_whitespace()
         .map(|x| x.parse::<u32>().unwrap())
         .collect();
-    let races: Vec<(u32, u32)> = times.into_iter().zip(distances.into_iter()).collect();
+    let races: Vec<(u32, u32)> = times.into_iter().zip(distances).collect();
 
     for (time, record_distance) in races {
         let mut num_winning_races: u32 = 0;
@@ -54,9 +54,9 @@ pub fn part_two(input: &str) -> Option<u32> {
     let lines = prepare_input(input);
     let split_first_line: Vec<&str> = lines[0].split(':').collect();
     let split_second_line: Vec<&str> = lines[1].split(':').collect();
-    let race_time: u64 = split_first_line[1].replace(" ", "").parse().unwrap();
+    let race_time: u64 = split_first_line[1].replace(' ', "").parse().unwrap();
 
-    let race_record_distance: u64 = split_second_line[1].replace(" ", "").parse().unwrap();
+    let race_record_distance: u64 = split_second_line[1].replace(' ', "").parse().unwrap();
 
     // iterate through possible button hold times
     // ignore min/max cases where boat moves 0 mm

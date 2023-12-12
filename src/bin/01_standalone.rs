@@ -19,7 +19,7 @@ fn replace_with_mappings(input: String, mappings: &HashMap<&str, &str>) -> Strin
 
     // find all possible mappings in each line
     let mut possible_mappings: Vec<(usize, &str)> = Vec::new();
-    for (map_key, _) in mappings {
+    for map_key in mappings.keys() {
         let matches: Vec<_> = result.match_indices(map_key).collect();
         for m in matches {
             possible_mappings.push((m.0, map_key));
@@ -31,7 +31,7 @@ fn replace_with_mappings(input: String, mappings: &HashMap<&str, &str>) -> Strin
     for mapping in possible_mappings {
         let index = mapping.0;
         let key = &mapping.1;
-        result.replace_range(index..(index + 1), &mappings[key]);
+        result.replace_range(index..(index + 1), mappings[key]);
     }
 
     result.to_string()
@@ -54,7 +54,7 @@ fn main() {
     let mut total = 0;
 
     // read file line by line
-    let lines = read_lines(&path);
+    let lines = read_lines(path);
     for line in lines {
         let mut calibration_value: String = String::new();
 

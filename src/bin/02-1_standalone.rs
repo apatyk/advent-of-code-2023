@@ -22,10 +22,10 @@ fn main() {
     let mut game_ids_total: u16 = 0;
 
     // parse out information from each line
-    let lines = read_lines(&path);
+    let lines = read_lines(path);
     for line in lines {
         let mut possible: bool = true;
-        let split_line: Vec<&str> = line.split(":").collect();
+        let split_line: Vec<&str> = line.split(':').collect();
         let game: Vec<&str> = split_line[0].split_whitespace().collect();
         let cube_handfuls: Vec<&str> = split_line[1].split("; ").collect();
 
